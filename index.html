@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <!DOCTYPE html>
+     <html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+
+            // For english verson of the site
+
+            // START LIVE CODE ---------------------
+             
+            let ClientData = {};
+            ClientData.page_path = window.location.pathname;
+            $.ajax({
+				type: "POST",
+                // - Change thsi path
+				url: "/GoogleAPI2/Report.aspx/FetchData",
+                data: '{data : ' + JSON.stringify(ClientData) + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response.d.html != "" || typeof response.d.html !== "undefined")
+                    {
+                        if(window.localStorage.getItem("current_lang") == "en"){
+                            $('.google-api').append("<h4>PageViews: "+response.d.html+"</h4>");
+                        }                     
+					}
+                }
+            });
+            
+            ///////////////////////-- END LIVE CODE -----------------------------
+
+
+            
+        </script>
+
+        <title>GoogleAPI Reporting</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="tst"><a href="/Index">Index</a></div>
+    </body>
+</html>
+
+
+</body>
+</html>
